@@ -12,7 +12,7 @@
   #:use-module (guix gexp)
   #:use-module (guix utils)
 
-  #:use-module (tminor-guix packages)
+  #:use-module (tminor-guix packages exwm-gdm)
 
   #:export (home-exwm-configuration
             home-exwm-service-type))

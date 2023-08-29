@@ -2,7 +2,6 @@
 
 (channel
  (version 0)
- (directory "tminor-guix")
  ;; (dependencies
  ;;  (channel
  ;;   (name rde)
