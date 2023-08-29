@@ -4,7 +4,7 @@
   #:use-module (guix download)
   #:use-module (guix git-download)
   #:use-module ((guix licenses) #:prefix license:)
-  #:use-module (buix build-system copy))
+  #:use-module (guix build-system copy))
 
 (define-public exwm-gdm
   (package
