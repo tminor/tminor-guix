@@ -1,7 +1,5 @@
-(define-module (tassos-guix closure)
+(define-module (tminor-guix closure)
   #:use-module (gnu packages compression)
-  #:use-module (gnu packages haskell-xyz)
-  #:use-module (gnu packages haskell-apps)
   #:use-module (gnu packages gnome)
   #:use-module (gnu packages gnupg)
   #:use-module (guix gexp)
@@ -11,7 +9,6 @@
   #:use-module (guix git-download)
   #:use-module (guix build-system copy)
   #:use-module (guix build-system trivial)
-  #:use-module (guix build-system haskell)
   #:use-module ((guix licenses) #:prefix license:)
 
   #:export (package-manifest-closure))
