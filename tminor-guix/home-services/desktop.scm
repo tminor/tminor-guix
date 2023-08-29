@@ -1,4 +1,4 @@
-(define-module (tassos-guix home-services desktop)
+(define-module (tminor-guix home-services desktop)
   #:use-module (gnu home services)
   #:use-module (gnu home services utils)
   #:use-module (gnu packages wm)
