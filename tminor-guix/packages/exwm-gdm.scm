@@ -19,7 +19,7 @@
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "03qxdhyi2119dvk2gv0gw0k835iaixi8w67lqwv5nbp42qn3bcp6"))))
+         "0jwqc1bvikmxvbrgx6avlnlay8i4n09y93wd0kbhhch7j85703k5"))))
     (build-system copy-build-system)
     (arguments
       `(#:install-plan
