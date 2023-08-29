@@ -25,4 +25,7 @@
       `(#:install-plan
         '(("exwm.desktop" "share/xsessions/exwm.desktop")
           ("exwm" "bin/exwm"))))
-    (synopsis "Supporting configuration for launching EXWM via GDM.")))
+    (synopsis "Supporting configuration for launching EXWM via GDM.")
+    (description "Starts EXWM via GDM.")
+    (home-page "https://github.com/Koekelas/exwm-gdm")
+    (license license:gpl3)))
