@@ -31,6 +31,21 @@
 (define (add-exwm-package config)
   (list (home-exwm-configuration-package config)))
 
+(define* (mixed-executable-text-file name #:rest text)
+  "Return an object representing an executable store file NAME containing TEXT.
+TEXT is a sequence of strings and file-like objects, as in:
+
+  (mixed-text-file \"profile\"
+                   \"export PATH=\" coreutils \"/bin:\" grep \"/bin\")
+
+This is the declarative counterpart of 'text-file*'."
+  (define build
+    (gexp (call-with-output-file (ungexp output "out")
+            (lambda (port)
+              (chmod port #o555)
+              (display (string-append (ungexp-splicing text)) port)))))
+  (computed-file name build))
+
 (define (add-exwm-files config)
   `((".config/exwmrc" ,(mixed-executable-text-file
                          "exwmrc"
