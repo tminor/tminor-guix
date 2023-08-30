@@ -17,49 +17,36 @@
   #:export (home-exwm-configuration
             home-exwm-service-type))
 
+(define list-of-file-likes?
+  (list-of file-like?))
+
+(define-maybe file-like)
+
+(define (serialize-file-like name value)
+  #~(format #f "~a=~a~%" '#$name #$value))
+
+(define (serialize-file-like name value)
+  #~(format #f "~a=~a~%" '#$name #$value))
+
 (define-configuration home-exwm-configuration
   (package
    (package exwm-gdm)
    "The exwm-gdm package to use.")
-  (exwmrc-head
-   (text-config '())
-   "List of strings or gexps for the head of the EXWM config file.")
-  (exwmrc-tail
-   (text-config '())
-   "List of strings or gexps for the tail of the EXWM config file."))
+  (exwmrc
+   (list-of-file-likes '())
+   "Strings or gexps for the EXWM config file."
+   empty-serializer))
 
 (define (add-exwm-package config)
   (list (home-exwm-configuration-package config)))
 
-(define* (mixed-executable-text-file name #:rest text)
-  "Return an object representing an executable store file NAME containing TEXT.
-TEXT is a sequence of strings and file-like objects, as in:
-
-  (mixed-text-file \"profile\"
-                   \"export PATH=\" coreutils \"/bin:\" grep \"/bin\")
-
-This is the declarative counterpart of 'text-file*'."
-  (define build
-    (gexp (call-with-output-file (ungexp output "out")
-            (lambda (port)
-              (chmod port #o555)
-              (display (string-append (ungexp-splicing text)) port)))))
-  (computed-file name build))
-
 (define (add-exwm-files config)
-  `((".config/exwmrc" ,(mixed-executable-text-file
-                         "exwmrc"
-                         (serialize-configuration
-                          config
-                          (filter-configuration-fields
-                           home-exwm-configuration-fields
-                           '(exwmrc-head
-                             exwmrc-tail)))))))
+  (list `(".config/exwm/exwmrc" ,(local-file config #:recursive? #t))))
 
 (define (add-exwmrc-extensions config extensions)
   (home-exwm-configuration
    (inherit config)
-   (exwmrc-head
+   (exwmrc
     (append (home-exwm-configuration-exwmrc-head config)
             extensions))))
 
